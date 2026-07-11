@@ -13,10 +13,56 @@ const prisma = new PrismaClient({
 async function main() {
   await prisma.item.deleteMany();
   await prisma.box.deleteMany();
+  await prisma.area.deleteMany();
+
+  const garage = await prisma.area.create({
+    data: {
+      code: "G",
+      name: "Garage",
+    },
+  });
+
+  const keller = await prisma.area.create({
+    data: {
+      code: "K",
+      name: "Keller",
+    },
+  });
+
+  await prisma.area.create({
+    data: {
+      code: "W",
+      name: "Waschküche",
+    },
+  });
+
+  await prisma.area.create({
+    data: {
+      code: "A",
+      name: "Abstellraum",
+    },
+  });
+
+  await prisma.area.create({
+    data: {
+      code: "H",
+      name: "Hobbyraum",
+    },
+  });
+
+  await prisma.area.create({
+    data: {
+      code: "GH",
+      name: "Gartenhaus",
+    },
+  });
 
   await prisma.box.create({
     data: {
-      id: "A01",
+      id: "G-A01",
+      areaId: garage.id,
+      shelf: "A",
+      number: 1,
       items: {
         create: [
           { name: "Kabelbinder weiss" },
@@ -29,19 +75,10 @@ async function main() {
 
   await prisma.box.create({
     data: {
-      id: "B03",
-      items: {
-        create: [
-          { name: "Ponal Holzleim" },
-          { name: "Sekundenkleber" },
-        ],
-      },
-    },
-  });
-
-  await prisma.box.create({
-    data: {
-      id: "E05",
+      id: "K-A01",
+      areaId: keller.id,
+      shelf: "A",
+      number: 1,
       items: {
         create: [
           { name: "M5 Senkkopfschrauben" },
@@ -52,7 +89,7 @@ async function main() {
     },
   });
 
-  console.log("Testdaten wurden erfolgreich eingefügt.");
+  console.log("Bereiche und Testkisten wurden erfolgreich eingefügt.");
 }
 
 main()

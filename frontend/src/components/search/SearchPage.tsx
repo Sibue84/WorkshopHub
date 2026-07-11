@@ -7,6 +7,8 @@ import { BoxCard } from "@/components/boxes/BoxCard";
 
 type BoxData = {
   id: string;
+  areaName: string;
+  shelf: string;
   items: string[];
 };
 
@@ -24,7 +26,12 @@ export function SearchPage({ boxes }: SearchPageProps) {
     .filter(Boolean);
 
   const filteredBoxes = boxes.filter((box) => {
-    const searchableText = [box.id, ...box.items]
+    const searchableText = [
+      box.id,
+      box.areaName,
+      box.shelf,
+      ...box.items,
+    ]
       .join(" ")
       .toLowerCase();
 
@@ -49,7 +56,7 @@ export function SearchPage({ boxes }: SearchPageProps) {
               <BoxCard
                 key={box.id}
                 id={box.id}
-                shelf={`Regal ${box.id.charAt(0)}`}
+                shelf={`${box.areaName} · Regal ${box.shelf}`}
                 items={box.items}
                 query={search}
               />

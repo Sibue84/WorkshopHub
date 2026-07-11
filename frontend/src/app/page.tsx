@@ -6,6 +6,8 @@ export default async function Home() {
 
   const boxes = databaseBoxes.map((box) => ({
     id: box.id,
+    areaName: box.area.name,
+    shelf: box.shelf,
     items: box.items.map((item) => item.name),
   }));
 
