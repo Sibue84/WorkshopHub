@@ -11,7 +11,9 @@ type Props = {
 export default async function BoxPage({ params }: Props) {
   const { id } = await params;
 
-  const box = boxes.find((b) => b.id === id);
+  const box = boxes.find(
+    (box) => box.id.toLowerCase() === id.toLowerCase()
+  );
 
   if (!box) {
     notFound();
@@ -19,40 +21,52 @@ export default async function BoxPage({ params }: Props) {
 
   return (
     <main className="min-h-screen bg-slate-50">
-      <div className="mx-auto max-w-3xl px-8 py-16">
+      <div className="mx-auto max-w-3xl px-6 py-12">
 
         <Link
           href="/"
-          className="text-slate-500 hover:text-slate-900"
+          className="text-slate-500 transition hover:text-slate-900"
         >
           ← Zurück
         </Link>
 
-        <h1 className="mt-6 text-5xl font-bold">
+        <h1 className="mt-8 text-6xl font-semibold tracking-tight">
           {box.id}
         </h1>
 
-        <p className="mt-2 text-lg text-slate-500">
-          {box.shelf}
-        </p>
+        <div className="mt-8 flex h-72 items-center justify-center rounded-3xl border border-dashed border-slate-300 bg-white shadow-sm">
 
-        <div className="mt-10 rounded-2xl border-2 border-dashed border-slate-300 bg-white p-12 text-center text-slate-400">
-          📷 Hier kommt später das Foto der Kiste
+          <div className="text-center">
+
+            <div className="text-6xl">
+              📷
+            </div>
+
+            <p className="mt-4 text-slate-500">
+              Noch kein Foto vorhanden
+            </p>
+
+          </div>
+
         </div>
 
         <h2 className="mt-10 text-2xl font-semibold">
           Inhalt
         </h2>
 
-        <div className="mt-4 space-y-3">
-          {box.items.map((item) => (
+        <div className="mt-5 overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+
+          {box.items.map((item, index) => (
             <div
               key={item}
-              className="rounded-xl bg-white p-4 shadow-sm"
+              className={`px-6 py-5 ${
+                index !== 0 ? "border-t border-slate-100" : ""
+              }`}
             >
               {item}
             </div>
           ))}
+
         </div>
 
       </div>

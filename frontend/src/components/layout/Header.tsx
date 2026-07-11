@@ -1,12 +1,16 @@
 export function Header() {
   return (
-    <header className="mb-10">
-      <h1 className="text-5xl font-bold tracking-tight text-slate-900">
+    <header className="mb-10 text-center">
+      <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-400">
+        Deine Werkstatt
+      </p>
+
+      <h1 className="mt-3 text-5xl font-semibold tracking-[-0.04em] text-slate-950 sm:text-6xl">
         WorkshopHub
       </h1>
 
-      <p className="mt-3 text-lg text-slate-500">
-        Finde jedes Material in deiner Werkstatt.
+      <p className="mx-auto mt-4 max-w-xl text-lg leading-7 text-slate-500">
+        Finde jedes Material schnell und direkt in der richtigen Kiste.
       </p>
     </header>
   );
